@@ -1,11 +1,16 @@
 # ⚡  qr-forge
+![License: GPL-3.0](https://img.shields.io/badge/License-GPLv3-blue.svg)
+![Python 3.12](https://img.shields.io/badge/Python-3.12-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-backend-009688)
+![Dockerized](https://img.shields.io/badge/Docker-Debian--slim-informational)
 
 ![qrforge screenshot](./screenshot.png)
 
 
-### _Precision‑built, Debian‑powered QR generation for professionals._
+### Self-hosted WiFi & text QR code generator (FastAPI, Docker, Debian)
 
-A sleek, containerized QR code generator engineered for **local**, **cloud**, and **DevOps‑grade** deployments.
+Generate WiFi QR codes (WPA/WPA2, nopass) and text/URL QR codes via a FastAPI backend, Debian-slim Docker image, and responsive dark web UI for local or cloud deployments.
+
 
 
 ---
@@ -240,9 +245,9 @@ git checkout -b feature/update-ui
 
 # ⚠️ License
 
-This work is created up the GNU GENERAL PUBLIC LICENSE Version 3.  See LICENSE.
+This work is licensed under the GNU General Public License version 3. See `LICENSE`.
 
-
+---
 # ⚠️ Disclaimer
 
 Software is provided **AS‑IS**.
@@ -250,4 +255,10 @@ Production security posture is **your** responsibility.
 
 ---
 
+### Keywords
+
+qr, qr code, qr-code, qr-generator, wifi qr, wifi-qr, wifi password qr,
+wpa qr, wpa-qr, wifi qrcode, self-hosted qr, fastapi qr, docker qr,
+debian qr code generator, web qr generator, local-first qr service
+---
 # ✔️ End of File
