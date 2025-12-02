@@ -1,4 +1,8 @@
 # ⚡  qr-forge
+
+![qrforge screenshot](./screenshot.png)
+
+
 ### _Precision‑built, Debian‑powered QR generation for professionals._
 
 A sleek, containerized QR code generator engineered for **local**, **cloud**, and **DevOps‑grade** deployments.
