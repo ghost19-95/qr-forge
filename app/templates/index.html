@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>qrforge – QR Code Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        margin: 0;
+        padding: 1.5rem;
+        background: #020617;
+        color: #e5e7eb;
+      }
+      .container {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 1.7rem;
+        margin-bottom: 0.25rem;
+      }
+      h2 {
+        font-size: 1.1rem;
+        margin: 1.25rem 0 0.5rem 0;
+      }
+      p {
+        font-size: 0.9rem;
+        color: #9ca3af;
+      }
+      form {
+        margin-top: 1rem;
+        padding: 1rem;
+        border-radius: 0.75rem;
+        border: 1px solid #1f2937;
+        background: #020617;
+      }
+      label {
+        display: block;
+        margin-bottom: 0.25rem;
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+      input[type="text"],
+      input[type="password"],
+      input[type="number"],
+      select {
+        width: 100%;
+        padding: 0.5rem 0.65rem;
+        border-radius: 0.5rem;
+        border: 1px solid #4b5563;
+        background: #020617;
+        color: #e5e7eb;
+        font-size: 0.9rem;
+        box-sizing: border-box;
+      }
+      input[type="text"]:focus,
+      input[type="password"]:focus,
+      input[type="number"]:focus,
+      select:focus {
+        outline: none;
+        border-color: #60a5fa;
+      }
+      .field-group {
+        margin-bottom: 0.75rem;
+      }
+      .inline-fields {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+      .inline-fields .field-group {
+        flex: 1;
+        min-width: 120px;
+        margin-bottom: 0;
+      }
+      .mode-toggle {
+        display: flex;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+      .mode-option {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.35rem 0.6rem;
+        border-radius: 9999px;
+        background: #020617;
+        border: 1px solid #1f2937;
+        cursor: pointer;
+        font-size: 0.85rem;
+      }
+      .mode-option input {
+        margin: 0;
+      }
+      .mode-option.active {
+        border-color: #2563eb;
+        background: #0b1220;
+      }
+      .hint {
+        font-size: 0.8rem;
+        color: #6b7280;
+      }
+      button {
+        margin-top: 0.5rem;
+        padding: 0.55rem 1.2rem;
+        border-radius: 9999px;
+        border: none;
+        background: #2563eb;
+        color: white;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #1d4ed8;
+      }
+      .qr-preview {
+        margin-top: 1.5rem;
+        padding: 1rem;
+        border-radius: 0.75rem;
+        border: 1px dashed #374151;
+        background: #020617;
+        text-align: center;
+      }
+      .qr-preview img {
+        display: block;
+        margin: 0.5rem auto 0.75rem auto;
+      }
+      .qr-preview p {
+        margin: 0.25rem 0;
+        font-size: 0.8rem;
+        color: #9ca3af;
+      }
+      .footer {
+        margin-top: 1.5rem;
+        font-size: 0.75rem;
+        color: #6b7280;
+        border-top: 1px solid #1f2937;
+        padding-top: 0.75rem;
+      }
+      a {
+        color: #93c5fd;
+      }
+      .wifi-box {
+        padding: 0.75rem;
+        border-radius: 0.75rem;
+        border: 1px solid #1f2937;
+        background: #020617;
+        margin-top: 0.5rem;
+      }
+      .checkbox-row {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin-top: 0.4rem;
+        font-size: 0.85rem;
+      }
+      .checkbox-row input[type="checkbox"] {
+        width: auto;
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 0.8rem;
+        background: #020617;
+        padding: 0.25rem 0.4rem;
+        border-radius: 0.35rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>qrforge – QR Code Generator</h1>
+      <p>
+        Generate QR codes for regular text/URLs or WiFi credentials. Designed for
+        local and cloud deployments with a single container.
+      </p>
+
+      <form method="get" action="/">
+        <div class="mode-toggle">
+          <label class="mode-option {{ 'active' if mode == 'text' else '' }}">
+            <input
+              type="radio"
+              name="mode"
+              value="text"
+              {{ 'checked' if mode == 'text' else '' }}
+            >
+            <span>Text / URL</span>
+          </label>
+          <label class="mode-option {{ 'active' if mode == 'wifi' else '' }}">
+            <input
+              type="radio"
+              name="mode"
+              value="wifi"
+              {{ 'checked' if mode == 'wifi' else '' }}
+            >
+            <span>WiFi</span>
+          </label>
+        </div>
+
+        {% if mode == 'text' %}
+        <div class="field-group">
+          <label for="data">Text or URL</label>
+          <input
+            id="data"
+            name="data"
+            type="text"
+            placeholder="https://example.com"
+            value="{{ data or '' }}"
+            required
+          >
+          <div class="hint">
+            This string will be encoded directly into the QR code.
+          </div>
+        </div>
+        {% else %}
+        <div class="wifi-box">
+          <h2>WiFi configuration</h2>
+          <div class="field-group">
+            <label for="wifi_ssid">SSID</label>
+            <input
+              id="wifi_ssid"
+              name="wifi_ssid"
+              type="text"
+              placeholder="MyWiFiNetwork"
+              value="{{ wifi_ssid or '' }}"
+              required
+            >
+          </div>
+
+          <div class="field-group">
+            <label for="wifi_password">Password</label>
+            <input
+              id="wifi_password"
+              name="wifi_password"
+              type="password"
+              placeholder="••••••••"
+              value="{{ wifi_password or '' }}"
+            >
+            <div class="hint">
+              Leave blank only if using "No password" (nopass).
+            </div>
+          </div>
+
+          <div class="inline-fields">
+            <div class="field-group">
+              <label for="wifi_auth">Security</label>
+              <select id="wifi_auth" name="wifi_auth">
+                <option value="WPA" {{ 'selected' if wifi_auth.upper() == 'WPA' else '' }}>WPA / WPA2</option>
+                <option value="WEP" {{ 'selected' if wifi_auth.upper() == 'WEP' else '' }}>WEP</option>
+                <option value="nopass" {{ 'selected' if wifi_auth.lower() == 'nopass' else '' }}>No password (open)</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label>&nbsp;</label>
+              <div class="checkbox-row">
+                <input
+                  id="wifi_hidden"
+                  type="checkbox"
+                  name="wifi_hidden"
+                  value="true"
+                  {{ 'checked' if wifi_hidden else '' }}
+                >
+                <label for="wifi_hidden" style="margin:0;">Hidden network</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="hint">
+            Most phones support WiFi QR codes using the <code>WIFI:T:...;S:...;P:...;H:...;;</code> format.
+            This page will build that string for you.
+          </div>
+
+          {% if wifi_payload %}
+          <div class="hint" style="margin-top:0.5rem;">
+            Encoded payload:
+            <code>{{ wifi_payload }}</code>
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="inline-fields" style="margin-top:0.75rem;">
+          <div class="field-group">
+            <label for="scale">Scale</label>
+            <input
+              id="scale"
+              name="scale"
+              type="number"
+              min="1"
+              max="50"
+              value="{{ scale }}"
+            >
+            <div class="hint">Size multiplier (default 5).</div>
+          </div>
+
+          <div class="field-group">
+            <label for="border">Border</label>
+            <input
+              id="border"
+              name="border"
+              type="number"
+              min="0"
+              max="20"
+              value="{{ border }}"
+            >
+            <div class="hint">Border width around the QR (default 4).</div>
+          </div>
+        </div>
+
+        <button type="submit">Generate QR Code</button>
+      </form>
+
+      {% if data %}
+      <div class="qr-preview">
+        <div class="hint">
+          QR code for:
+        </div>
+        {% if mode == 'wifi' and wifi_payload %}
+          <p>WiFi network: <strong>{{ wifi_ssid }}</strong></p>
+        {% else %}
+          <p>{{ data }}</p>
+        {% endif %}
+        <img
+          src="/qr?data={{ data | urlencode }}&scale={{ scale }}&border={{ border }}"
+          alt="Generated QR code"
+        >
+        <p>Right-click the image and choose "Save image as..." to download.</p>
+      </div>
+      {% endif %}
+
+      <div class="footer">
+        Backend API endpoint: GET /qr?data=...&scale=5&border=4<br>
+        Example (curl): curl --get --data-urlencode "data=https://example.com" --data "scale=5" --data "border=4" http://localhost:8002/qr --output qr.png
+      </div>
+    </div>
+
+    <script>
+    document.querySelectorAll("input[name='mode']").forEach(r => {
+        r.addEventListener("change", () => {
+            r.form.submit();
+        });
+    });
+</script>
+
+
+
+  </body>
+</html>
+      </div>   <!-- END container -->
+  </body>
+<script>
+document.querySelectorAll("input[name='mode']").forEach(r => {
+    r.addEventListener("change", () => {
+        r.form.submit();
+    });
+});
+</script>
+</html>
+

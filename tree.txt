@@ -1,0 +1,13 @@
+.
+├── app
+│   ├── __init__.py
+│   ├── main.py
+│   └── templates
+│       └── index.html
+├── docker-compose.yml
+├── Dockerfile
+├── README.md
+├── requirements.txt
+└── tree.txt
+
+3 directories, 8 files

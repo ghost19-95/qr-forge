@@ -1,0 +1,13 @@
+services:
+  qrforge:
+    build:
+      context: .
+    container_name: qrforge
+    restart: unless-stopped
+    ports:
+      - "8002:8002"
+    environment:
+      QRFORGE_ENV: "production"
+    # Bind-mount local app code into the container so you can edit without rebuild
+    volumes:
+      - ./app:/app/app
